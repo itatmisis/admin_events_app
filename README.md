@@ -1,16 +1,36 @@
-# admin_events
+# QR Code Scanner for Event Moderators
 
-A new Flutter project.
+This is a Flutter application for event moderators to scan QR codes. The application is currently under development.
+
+## Technology Stack
+
+- **State Management**: [Bloc](https://pub.dev/packages/flutter_bloc)
+- **Routing**: [auto_route](https://pub.dev/packages/auto_route)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get started with this project, clone the repository and run the following commands:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+git clone https://github.com/itatmisis/admin_events_app.git
+cd https://github.com/itatmisis/admin_events_app.git
+flutter pub get
+dart run build_runner build
+flutter run
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Development Progress
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project is still in the development phase. Below is a list of planned features and the progress:
+
+- [x] Set up project structure
+- [x] Authentication
+- [ ] QR Code Scanning
+- [ ] Backend Integration (pending backend development)
+- [ ] Create user interface
+
+## Architecture
+
+The current architecture of the application is illustrated below:
+
+![Architecture](architecture.png)
