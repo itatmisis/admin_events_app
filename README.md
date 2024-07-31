@@ -13,7 +13,7 @@ To get started with this project, clone the repository and run the following com
 
 ```bash
 git clone https://github.com/itatmisis/admin_events_app.git
-cd https://github.com/itatmisis/admin_events_app.git
+cd admin_events_app/
 flutter pub get
 dart run build_runner build
 flutter run
