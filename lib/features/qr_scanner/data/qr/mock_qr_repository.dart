@@ -1,16 +1,31 @@
+import 'package:admin_events/features/qr_scanner/domain/entities/guest.dart';
 import 'package:admin_events/features/qr_scanner/domain/entities/qr_data.dart';
 import 'package:admin_events/features/qr_scanner/domain/repositories/qr_repository.dart';
+import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MockQRRepository implements QRRepository {
   late final BehaviorSubject<QRData> _qrController = BehaviorSubject<QRData>.seeded(const QRDataInitial());
+  
+  int counter = 0;
 
   @override
   Stream<QRData> getQrResult() => _qrController.asBroadcastStream();
 
   @override
   Future<void> checkQR(String data) async {
-    Future.delayed(const Duration(milliseconds: 500));
-    _qrController.add(const QRDataInvalid());
+    if (counter % 2 == 0) {
+      Future.delayed(const Duration(milliseconds: 500));
+      _qrController.add(const QRDataInvalid());
+    } else {
+      Future.delayed(const Duration(milliseconds: 500));
+      _qrController.add( QRDataValid(
+          guest: Guest(photoData: () async {
+            var imageBytes = await rootBundle.load('assets/me.jpg');
+            return imageBytes.buffer.asUint8List();
+          }, name: 'Gennady'))
+      );
+    }
+    counter++;
   }
 }

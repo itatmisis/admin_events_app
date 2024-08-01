@@ -1,7 +1,5 @@
-import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+part of 'auth_bloc.dart';
 
-part 'auth_state.freezed.dart';
 
 enum BlocAuthStatus {
   initial,

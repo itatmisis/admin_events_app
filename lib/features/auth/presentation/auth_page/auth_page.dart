@@ -1,7 +1,6 @@
 import 'package:admin_events/features/auth/domain/repository/auth_repository.dart';
 import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_bloc.dart';
-import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_event.dart';
-import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_state.dart';
+import 'package:admin_events/features/router/app_router.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -26,24 +25,32 @@ class AuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const _LoginField(),
-            const Padding(padding: EdgeInsets.all(12)),
-            const _PasswordField(),
-            const Padding(padding: EdgeInsets.all(4)),
-            _ErrorMessage(),
-            const Padding(padding: EdgeInsets.all(12)),
-            _LoginButton()
-          ],
-        ),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state.status == BlocAuthStatus.authenticated) {
+          context.router.replace(const ScannerRoute());
+        }
+      },
+      child: Scaffold(
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const _LoginField(),
+                  const Padding(padding: EdgeInsets.all(12)),
+                  const _PasswordField(),
+                  const Padding(padding: EdgeInsets.all(4)),
+                  _ErrorMessage(),
+                  const Padding(padding: EdgeInsets.all(12)),
+                  _LoginButton()
+                ],
+              ),
+            ),
+          )
       ),
-    ));
+    );
   }
 }
 

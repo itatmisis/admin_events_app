@@ -19,6 +19,8 @@ dependencies:
 
   auto_route: ^9.1.0
 
+  flutter_web_qrcode_scanner: ^1.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -34,3 +36,6 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/

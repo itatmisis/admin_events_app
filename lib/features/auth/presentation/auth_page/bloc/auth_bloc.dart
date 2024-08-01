@@ -1,9 +1,13 @@
 import 'package:admin_events/features/auth/domain/entities/auth_status.dart';
 import 'package:admin_events/features/auth/domain/entities/login_credentials.dart';
 import 'package:admin_events/features/auth/domain/repository/auth_repository.dart';
-import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_event.dart';
-import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_state.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'auth_event.dart';
+part 'auth_state.dart';
+part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;

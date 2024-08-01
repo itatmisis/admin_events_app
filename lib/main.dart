@@ -3,6 +3,8 @@ import 'package:admin_events/features/auth/data/auth/auth_repository_impl.dart';
 import 'package:admin_events/features/auth/data/auth/mock_auth_api.dart';
 import 'package:admin_events/features/auth/data/user/mock_user_api.dart';
 import 'package:admin_events/features/auth/data/user/user_repository_impl.dart';
+import 'package:admin_events/features/qr_scanner/data/guest/mock_guest_repository.dart';
+import 'package:admin_events/features/qr_scanner/data/qr/mock_qr_repository.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -14,5 +16,8 @@ Future<void> main() async {
   final userApi = MockUserApi(authRepository);
   final userRepository = UserRepositoryImpl(userApi);
 
-  bootstrap(authRepository, userRepository);
+  final qrRepository = MockQRRepository();
+  final guestRepository = MockGuestRepository();
+
+  bootstrap(authRepository, userRepository, qrRepository, guestRepository);
 }
