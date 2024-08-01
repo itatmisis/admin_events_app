@@ -5,18 +5,18 @@ import 'package:rxdart/rxdart.dart';
 
 class MockAuthApi {
   late final _statusController =
-      BehaviorSubject<AuthStatus>.seeded(const UnknownAuthStatus());
+      BehaviorSubject<AuthStatus>.seeded(const AuthStatusUnknown());
 
   Stream<AuthStatus> getStatus() => _statusController.asBroadcastStream();
 
   Future<void> logIn(LoginCredentials credentials) async {
     await Future.delayed(Duration(seconds: 2));
     _statusController.add(
-        const AuthenticatedAuthStatus(credentials: UserCredentials(token: '')));
+        const AuthStatusAuthenticated(credentials: UserCredentials(token: '')));
   }
 
   Future<void> logOut() async {
-    _statusController.add(const UnauthenticatedAuthStatus());
+    _statusController.add(const AuthStatusUnauthenticated());
   }
 
   Future<void> close() async {

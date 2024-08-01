@@ -26,15 +26,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthState _onAuthEventSubscriptionData(AuthStatus authStatus) {
     print(authStatus);
-    if (authStatus is AuthenticatedAuthStatus) {
+    if (authStatus is AuthStatusAuthenticated) {
       return state.copyWith(status: BlocAuthStatus.authenticated);
     }
 
-    if (authStatus is InvalidCredentialsAuthStatus) {
+    if (authStatus is AuthStatusInvalidCredentials) {
       return state.copyWith(status: BlocAuthStatus.wrongCredentials);
     }
 
-    if (authStatus is FailureAuthStatus) {
+    if (authStatus is AuthStatusFailure) {
       return state.copyWith(status: BlocAuthStatus.failure);
     }
 

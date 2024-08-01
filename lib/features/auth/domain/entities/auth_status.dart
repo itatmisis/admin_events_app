@@ -7,26 +7,26 @@ class AuthStatus {
   const AuthStatus();
 }
 
-class UnknownAuthStatus extends AuthStatus {
-  const UnknownAuthStatus();
+class AuthStatusUnknown extends AuthStatus {
+  const AuthStatusUnknown();
 }
 
-class UnauthenticatedAuthStatus extends AuthStatus {
-  const UnauthenticatedAuthStatus();
-}
-
-@freezed
-class AuthenticatedAuthStatus extends AuthStatus
-    with _$AuthenticatedAuthStatus {
-  const factory AuthenticatedAuthStatus(
-      {required UserCredentials credentials}) = _AuthenticatedAuthStatus;
-}
-
-class InvalidCredentialsAuthStatus extends AuthStatus {
-  const InvalidCredentialsAuthStatus();
+class AuthStatusUnauthenticated extends AuthStatus {
+  const AuthStatusUnauthenticated();
 }
 
 @freezed
-class FailureAuthStatus extends AuthStatus with _$FailureAuthStatus {
-  const factory FailureAuthStatus({required String error}) = _FailureAuthStatus;
+class AuthStatusAuthenticated extends AuthStatus
+    with _$AuthStatusAuthenticated {
+  const factory AuthStatusAuthenticated(
+      {required UserCredentials credentials}) = _AuthStatusAuthenticated;
+}
+
+class AuthStatusInvalidCredentials extends AuthStatus {
+  const AuthStatusInvalidCredentials();
+}
+
+@freezed
+class AuthStatusFailure extends AuthStatus with _$AuthStatusFailure {
+  const factory AuthStatusFailure({required String error}) = _AuthStatusFailure;
 }
