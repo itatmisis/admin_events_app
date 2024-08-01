@@ -1,8 +1,7 @@
-import 'package:admin_events/features/auth/data/auth/auth_repository.dart';
+import 'package:admin_events/features/auth/domain/repository/auth_repository.dart';
 import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_bloc.dart';
 import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_event.dart';
 import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_state.dart';
-import 'package:admin_events/features/router/app_router.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 
-  static const _route = AuthRoute.new;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(context.read<AuthRepository>())..add(const AuthEventSubscriptionRequested()),
+      create: (_) => AuthBloc(context.read<AuthRepository>())
+        ..add(const AuthEventSubscriptionRequested()),
       child: const AuthView(),
     );
   }
@@ -29,24 +27,23 @@ class AuthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const _LoginField(),
-              const Padding(padding: EdgeInsets.all(12)),
-              const _PasswordField(),
-              const Padding(padding: EdgeInsets.all(4)),
-              _ErrorMessage(),
-              const Padding(padding: EdgeInsets.all(12)),
-              _LoginButton()
-            ],
-          ),
+        body: Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const _LoginField(),
+            const Padding(padding: EdgeInsets.all(12)),
+            const _PasswordField(),
+            const Padding(padding: EdgeInsets.all(4)),
+            _ErrorMessage(),
+            const Padding(padding: EdgeInsets.all(12)),
+            _LoginButton()
+          ],
         ),
-      )
-    );
+      ),
+    ));
   }
 }
 
@@ -57,7 +54,8 @@ class _LoginField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       key: const Key('authPage_loginInput_textField'),
-      onChanged: (l) => context.read<AuthBloc>().add(AuthEventLoginChanged(login: l)),
+      onChanged: (l) =>
+          context.read<AuthBloc>().add(AuthEventLoginChanged(login: l)),
       decoration: const InputDecoration(
         labelText: 'Логин',
       ),
@@ -72,7 +70,8 @@ class _PasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       key: const Key('authPage_passwordInput_textField'),
-      onChanged: (p) => context.read<AuthBloc>().add(AuthEventPasswordChanged(password: p)),
+      onChanged: (p) =>
+          context.read<AuthBloc>().add(AuthEventPasswordChanged(password: p)),
       obscureText: true,
       decoration: const InputDecoration(
         labelText: 'Пароль',
@@ -85,7 +84,7 @@ class _ErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentStatus = context.select(
-          (AuthBloc bloc) => bloc.state.status,
+      (AuthBloc bloc) => bloc.state.status,
     );
 
     var message = '';
@@ -99,16 +98,18 @@ class _ErrorMessage extends StatelessWidget {
         break;
     }
 
-    return Text(message, style: const TextStyle(color: Colors.red),);
+    return Text(
+      message,
+      style: const TextStyle(color: Colors.red),
+    );
   }
 }
-
 
 class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentStatus = context.select(
-          (AuthBloc bloc) => bloc.state.status,
+      (AuthBloc bloc) => bloc.state.status,
     );
 
     if (currentStatus == BlocAuthStatus.authenticated ||

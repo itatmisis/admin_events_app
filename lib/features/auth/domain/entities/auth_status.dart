@@ -16,10 +16,10 @@ class UnauthenticatedAuthStatus extends AuthStatus {
 }
 
 @freezed
-class AuthenticatedAuthStatus extends AuthStatus with _$AuthenticatedAuthStatus {
-  const factory AuthenticatedAuthStatus({
-    required UserCredentials credentials
-  }) = _AuthenticatedAuthStatus;
+class AuthenticatedAuthStatus extends AuthStatus
+    with _$AuthenticatedAuthStatus {
+  const factory AuthenticatedAuthStatus(
+      {required UserCredentials credentials}) = _AuthenticatedAuthStatus;
 }
 
 class InvalidCredentialsAuthStatus extends AuthStatus {
@@ -28,7 +28,5 @@ class InvalidCredentialsAuthStatus extends AuthStatus {
 
 @freezed
 class FailureAuthStatus extends AuthStatus with _$FailureAuthStatus {
-  const factory FailureAuthStatus({
-    required String error
-  }) = _FailureAuthStatus;
+  const factory FailureAuthStatus({required String error}) = _FailureAuthStatus;
 }

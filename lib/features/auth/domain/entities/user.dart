@@ -4,5 +4,5 @@ part 'user.freezed.dart';
 
 @freezed
 class User with _$User {
-  const factory User({ required String id }) = _User;
+  const factory User({required String id}) = _User;
 }
