@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:admin_events/features/qr_scanner/domain/entities/qr_data.dart';
 import 'package:admin_events/features/qr_scanner/presentation/scanner_page/bloc/scanner_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_qrcode_scanner/flutter_web_qrcode_scanner.dart';
+
+part 'target_camera.dart';
 
 class QRScanner extends StatelessWidget {
   const QRScanner({super.key});
@@ -111,7 +115,11 @@ class _QRScannerImplementationState extends State<_QRScannerImplementation> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    var width = MediaQuery.of(context).size.width - 80;
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
+
+
+    var size = (h > w ? w : h) - 80;
 
     return BlocListener<ScannerBloc, ScannerState>(
       listener: (context, state) {
@@ -120,8 +128,8 @@ class _QRScannerImplementationState extends State<_QRScannerImplementation> {
         }
       },
       child: SizedBox(
-          width: width,
-          height: width,
+          width: size,
+          height: size,
           child: Stack(
             children: [
               FlutterWebQrcodeScanner(
@@ -134,36 +142,25 @@ class _QRScannerImplementationState extends State<_QRScannerImplementation> {
                     const ScannerEvent.initializedFailed()),
                 onPermissionDeniedError: () => context.read<ScannerBloc>().add(
                     const ScannerEvent.initializedFailed()),
-                height: width,
+                height: size,
               ),
 
               Align(
                 alignment: Alignment.center,
-                child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(Color(0xFF06131F), BlendMode.srcOut),
-                  child: Container(
-                    height: 190,
-                    width: 190,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF06131F),
-                    ),
-                  ),
+                child: ClipPath(
+                  clipper: CameraClipper(sizeRect: 300),
+                  child: Container(color: theme.scaffoldBackgroundColor),
                 ),
               ),
 
-              Align(
+              const Align(
                 alignment: Alignment.center,
-                child: ColorFiltered(
-                    colorFilter: ColorFilter.mode(theme.scaffoldBackgroundColor, BlendMode.srcOut),
-                    child: Container(
-                      height: 200,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        color: theme.scaffoldBackgroundColor,
-                      ),
-                    ),
-                ),
-              )
+                child: SizedBox(
+                  width: 300,
+                  height: 300,
+                  child: TargetCamera(color: Colors.white,),
+                )
+              ),
             ],
           )
       ),
