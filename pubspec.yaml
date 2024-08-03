@@ -18,6 +18,7 @@ dependencies:
   rxdart: ^0.28.0
 
   auto_route: ^9.1.0
+  google_fonts: ^6.2.1
 
   flutter_web_qrcode_scanner: ^1.1.1
 

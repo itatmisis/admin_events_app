@@ -22,12 +22,16 @@ class GuestForm extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: ElevatedButton(
-                onPressed: () => context.read<ScannerBloc>().add(const ScannerEvent.invalidGuestRejected()),
-                child: const Text('Закрыть'),
+              padding: const EdgeInsets.all(20),
+              child: SizedBox(
+                width: double.infinity,
+                height: 60,
+                child: ElevatedButton(
+                  onPressed: () => context.read<ScannerBloc>().add(const ScannerEvent.invalidGuestRejected()),
+                  child: const Text('Закрыть'),
 
-              ),
+                ),
+              )
             )
           )
         ],
@@ -35,38 +39,66 @@ class GuestForm extends StatelessWidget {
     }
 
     if (qrData is QRDataValid) {
-      return Column(
+      return Stack(
         children: [
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: FutureBuilder(
-                future: qrData.guest.photoData(),
-                builder: (context, data) {
-                  if (data.hasData) {
-                    return Image.memory(data.requireData);
-                  }
-
-                  return const SizedBox.shrink();
-                }
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: FutureBuilder(
+                        future: qrData.guest.photoData(),
+                        builder: (context, data) {
+                          if (data.hasData) {
+                            return Image.memory(data.requireData);
+                          }
+                          return const SizedBox.shrink();
+                        }
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Text(qrData.guest.name),
+                ],
+              ),
             ),
           ),
 
-          Text(qrData.guest.name),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () => context.read<ScannerBloc>().add(const ScannerEvent.guestRejected()),
-                  child: const Text('Отклонить')
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: ElevatedButton(
+                          onPressed: () => context.read<ScannerBloc>().add(const ScannerEvent.guestRejected()),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          child: const Text('Отклонить')
+                      ),
+                    )
+                  ),
+                  const SizedBox(width: 20,),
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: ElevatedButton(
+                          onPressed: () => context.read<ScannerBloc>().add(const ScannerEvent.guestApproved()),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                          child: const Text('Одобрить')
+                      ),
+                    )
+                  )
+                ],
               ),
-              const SizedBox(width: 20,),
-              ElevatedButton(
-                  onPressed: () => context.read<ScannerBloc>().add(const ScannerEvent.guestApproved()),
-                  child: const Text('Одобрить')
-              ),
-            ],
+            ),
           )
         ],
       );

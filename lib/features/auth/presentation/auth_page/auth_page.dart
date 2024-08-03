@@ -3,7 +3,9 @@ import 'package:admin_events/features/auth/presentation/auth_page/bloc/auth_bloc
 import 'package:admin_events/features/router/app_router.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
@@ -38,12 +40,14 @@ class AuthView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Image.asset('assets/itam_pixel.png', filterQuality: FilterQuality.none,),
+                  const Padding(padding: EdgeInsets.all(24)),
                   const _LoginField(),
-                  const Padding(padding: EdgeInsets.all(12)),
+                  const Padding(padding: EdgeInsets.all(8)),
                   const _PasswordField(),
                   const Padding(padding: EdgeInsets.all(4)),
                   _ErrorMessage(),
-                  const Padding(padding: EdgeInsets.all(12)),
+                  const Padding(padding: EdgeInsets.all(8)),
                   _LoginButton()
                 ],
               ),
@@ -63,9 +67,7 @@ class _LoginField extends StatelessWidget {
       key: const Key('authPage_loginInput_textField'),
       onChanged: (l) =>
           context.read<AuthBloc>().add(AuthEventLoginChanged(login: l)),
-      decoration: const InputDecoration(
-        labelText: 'Логин',
-      ),
+      decoration: const InputDecoration(labelText: 'Логин'),
     );
   }
 }
@@ -80,9 +82,7 @@ class _PasswordField extends StatelessWidget {
       onChanged: (p) =>
           context.read<AuthBloc>().add(AuthEventPasswordChanged(password: p)),
       obscureText: true,
-      decoration: const InputDecoration(
-        labelText: 'Пароль',
-      ),
+      decoration: const InputDecoration(labelText: 'Пароль'),
     );
   }
 }
@@ -115,19 +115,25 @@ class _ErrorMessage extends StatelessWidget {
 class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     final currentStatus = context.select(
       (AuthBloc bloc) => bloc.state.status,
     );
 
     if (currentStatus == BlocAuthStatus.authenticated ||
         currentStatus == BlocAuthStatus.inProgress) {
-      return const CircularProgressIndicator();
+      return Text('Загрузка...', style: theme.textTheme.headlineMedium);
     }
 
-    return ElevatedButton(
-      key: const Key('authPage_login_elevatedButton'),
-      onPressed: () => context.read<AuthBloc>().add(const AuthEventLogIn()),
-      child: const Text('Войти'),
+    return SizedBox(
+      width: double.infinity,
+      height: 60,
+      child: ElevatedButton(
+        key: const Key('authPage_login_elevatedButton'),
+        onPressed: () => context.read<AuthBloc>().add(const AuthEventLogIn()),
+        child: const Text('Войти'),
+      ),
     );
   }
 }

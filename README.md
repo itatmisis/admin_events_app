@@ -1,11 +1,20 @@
 # QR Code Scanner for Event Moderators
 
-This is a Flutter application for event moderators to scan QR codes. The application is currently under development.
+This is a Flutter Web application for event moderators to scan QR codes. The application is currently under development.
 
 ## Technology Stack
 
 - **State Management**: [Bloc](https://pub.dev/packages/flutter_bloc)
 - **Routing**: [auto_route](https://pub.dev/packages/auto_route)
+
+## Screenshots
+
+<p align="center">
+  <img src="readme/login.png" alt="Login page" width="200"/>
+  <img src="readme/home.png" alt="Home page" width="200"/>
+  <img src="readme/scan.png" alt="QR scanning" width="200"/>
+  <img src="readme/guest.png" alt="Accepting guests" width="200"/>
+</p>
 
 ## Getting Started
 
@@ -33,4 +42,4 @@ This project is still in the development phase. Below is a list of planned featu
 
 The current architecture of the application is illustrated below:
 
-![Architecture](architecture.png)
+![Architecture](readme/architecture.png)
