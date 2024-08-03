@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class AuthPage extends StatelessWidget {
+
   const AuthPage({super.key});
 
   @override
@@ -30,7 +31,11 @@ class AuthView extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.status == BlocAuthStatus.authenticated) {
-          context.router.replace(const ScannerRoute());
+          if (context.router.canPop()) {
+            context.router.popForced();
+          } else {
+            context.router.replace(const ScannerRoute());
+          }
         }
       },
       child: Scaffold(

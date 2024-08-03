@@ -29,7 +29,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   AuthState _onAuthEventSubscriptionData(AuthStatus authStatus) {
-    print(authStatus);
     if (authStatus is AuthStatusAuthenticated) {
       return state.copyWith(status: BlocAuthStatus.authenticated);
     }

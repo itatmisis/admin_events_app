@@ -33,20 +33,20 @@ class App extends StatelessWidget {
       RepositoryProvider.value(
         value: guestRepository,
       )
-    ], child: AppView());
+    ], child: AppView(appRouter: AppRouter(authRepository),));
   }
 }
 
 class AppView extends StatelessWidget {
-  final AppRouter _appRouter = AppRouter();
+  final AppRouter appRouter;
 
-  AppView({super.key});
+  AppView({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig: _appRouter.config(),
+      routerConfig: appRouter.config(),
       theme: getAppTheme(),
     );
   }
