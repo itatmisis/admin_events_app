@@ -22,7 +22,7 @@ To get started with this project, clone the repository and run the following com
 
 ```bash
 git clone https://github.com/itatmisis/admin_events_app.git
-cd admin_events_app/
+cd admin_events_app
 flutter pub get
 dart run build_runner build
 flutter run
@@ -34,9 +34,9 @@ This project is still in the development phase. Below is a list of planned featu
 
 - [x] Set up project structure
 - [x] Authentication
-- [ ] QR Code Scanning
+- [x] QR Code Scanning
+- [x] Create user interface
 - [ ] Backend Integration (pending backend development)
-- [ ] Create user interface
 
 ## Architecture
 
