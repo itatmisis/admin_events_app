@@ -23,7 +23,11 @@ class AuthGuard extends AutoRouteGuard {
     if(_status is AuthStatusAuthenticated) {
       resolver.next(true);
     } else {
-      resolver.redirect(const AuthRoute());
+      resolver.redirect(AuthRoute(onResult: () {
+        router.markUrlStateForReplace();
+        router.removeLast();
+        resolver.next();
+      }));
     }
   }
 }

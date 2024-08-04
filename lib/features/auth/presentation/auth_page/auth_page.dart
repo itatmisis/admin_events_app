@@ -10,32 +10,36 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class AuthPage extends StatelessWidget {
+  final void Function()? onResult;
 
-  const AuthPage({super.key});
+  const AuthPage({super.key, this.onResult});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => AuthBloc(context.read<AuthRepository>())
         ..add(const AuthEventSubscriptionRequested()),
-      child: const AuthView(),
+      child: AuthView(onResult: onResult),
     );
   }
 }
 
 class AuthView extends StatelessWidget {
-  const AuthView({super.key});
+  final void Function()? onResult;
+
+  const AuthView({super.key, this.onResult});
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
+        if (state.status == BlocAuthStatus.authenticated && onResult != null) {
+          onResult!();
+          return;
+        }
+
         if (state.status == BlocAuthStatus.authenticated) {
-          if (context.router.canPop()) {
-            context.router.popForced();
-          } else {
-            context.router.replace(const ScannerRoute());
-          }
+          context.router.replace(const ScannerRoute());
         }
       },
       child: Scaffold(
