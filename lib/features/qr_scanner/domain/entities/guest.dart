@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 import 'package:admin_events/utilities/deferred_image.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
