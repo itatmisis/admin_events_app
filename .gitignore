@@ -34,6 +34,10 @@ migrate_working_dir/
 #Flutter autogen related
 *.*.dart
 
+#Debug fonts
+*.otf
+*.ttf
+
 # Symbolication related
 app.*.symbols
 

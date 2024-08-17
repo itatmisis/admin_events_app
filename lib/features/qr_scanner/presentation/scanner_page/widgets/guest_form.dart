@@ -52,7 +52,7 @@ class GuestForm extends StatelessWidget {
                     width: 200,
                     height: 200,
                     child: FutureBuilder(
-                        future: qrData.guest.photoData(),
+                        future: qrData.guest.photoData.load(),
                         builder: (context, data) {
                           if (data.hasData) {
                             return Image.memory(data.requireData);

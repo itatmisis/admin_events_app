@@ -39,7 +39,7 @@ class AuthView extends StatelessWidget {
         }
 
         if (state.status == BlocAuthStatus.authenticated) {
-          context.router.replace(const ScannerRoute());
+          context.router.replace(const EventsListRoute());
         }
       },
       child: Scaffold(

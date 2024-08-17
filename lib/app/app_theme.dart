@@ -10,6 +10,24 @@ ThemeData getAppTheme() {
       bodySmall: TextStyle(fontSize: 12, color: Colors.white)
   ));
 
+  // const textTheme = TextTheme(
+  //   titleMedium: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   headlineMedium: TextStyle(fontSize: 16, color: Colors.white, fontFamily: 'SBSansText'),
+  //   bodyMedium: TextStyle(fontSize: 16, color: Colors.white, fontFamily: 'SBSansText'),
+  //   bodySmall: TextStyle(fontSize: 12, color: Colors.white, fontFamily: 'SBSansText'),
+  //   displayLarge: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   displayMedium: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   displaySmall: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   headlineLarge: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   headlineSmall: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   titleLarge: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   titleSmall: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   bodyLarge: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   labelLarge: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   labelMedium: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  //   labelSmall: TextStyle(color: Colors.white, fontFamily: 'SBSansText'),
+  // );
+
   final backgroundColor = Color(0xFF282828);
 
   return ThemeData(

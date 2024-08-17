@@ -10,13 +10,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class ScannerPage extends StatelessWidget {
-  const ScannerPage({super.key});
+  final String eventId;
+
+  const ScannerPage({super.key, required this.eventId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ScannerBloc>(
       create: (_) => ScannerBloc(context.read<QRRepository>(), context.read<GuestRepository>())
-        ..add(const ScannerEvent.subscriptionRequested()),
+        ..add(ScannerEvent.subscriptionRequested(eventId: eventId)),
       child: const ScannerView(),
     );
   }

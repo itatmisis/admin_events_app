@@ -2,7 +2,7 @@ part of 'scanner_bloc.dart';
 
 @freezed
 class ScannerEvent with _$ScannerEvent {
-  const factory ScannerEvent.subscriptionRequested() = _SubscriptionRequested;
+  const factory ScannerEvent.subscriptionRequested({required String eventId}) = _SubscriptionRequested;
   const factory ScannerEvent.openRequested() = _OpenRequested;
   const factory ScannerEvent.closeRequested() = _CloseRequested;
   const factory ScannerEvent.initializedFailed() = _InitializedFailed;

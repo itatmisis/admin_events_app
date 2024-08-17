@@ -40,3 +40,9 @@ flutter:
 
   assets:
     - assets/
+
+  fonts:
+    - family: SBSansText
+      fonts:
+        - asset: fonts/SBSansText-Medium.otf
+          weight: 500

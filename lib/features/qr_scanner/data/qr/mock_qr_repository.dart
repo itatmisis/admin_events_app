@@ -1,6 +1,7 @@
 import 'package:admin_events/features/qr_scanner/domain/entities/guest.dart';
 import 'package:admin_events/features/qr_scanner/domain/entities/qr_data.dart';
 import 'package:admin_events/features/qr_scanner/domain/repositories/qr_repository.dart';
+import 'package:admin_events/utilities/deferred_image.dart';
 import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -20,10 +21,10 @@ class MockQRRepository implements QRRepository {
     } else {
       Future.delayed(const Duration(milliseconds: 500));
       _qrController.add( QRDataValid(
-          guest: Guest(photoData: () async {
+          guest: Guest(photoData: DeferredImage(() async {
             var imageBytes = await rootBundle.load('assets/me.jpg');
             return imageBytes.buffer.asUint8List();
-          }, name: 'Gennady'))
+          }), name: 'Gennady'))
       );
     }
     counter++;
