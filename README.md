@@ -35,6 +35,7 @@ This project is still in the development phase. Below is a list of planned featu
 - [x] Set up project structure
 - [x] Authentication
 - [x] QR Code Scanning
+- [x] Events list
 - [x] Create user interface
 - [ ] Backend Integration (pending backend development)
 
