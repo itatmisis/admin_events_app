@@ -11,7 +11,9 @@ This is a Flutter Web application for event moderators to scan QR codes. The app
 
 <p align="center">
   <img src="readme/login.png" alt="Login page" width="200"/>
-  <img src="readme/home.png" alt="Home page" width="200"/>
+  <img src="readme/events_list.png" alt="Home page" width="200"/>
+  <img src="readme/event.png" alt="Event page" width="200"/>
+  <img src="readme/scan_home.png" alt="QR scanner onboarding page" width="200"/>
   <img src="readme/scan.png" alt="QR scanning" width="200"/>
   <img src="readme/guest.png" alt="Accepting guests" width="200"/>
 </p>

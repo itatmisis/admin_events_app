@@ -29,7 +29,32 @@ class MockEventRepository implements EventRepository {
 
 Успей подать заявку и пройти тестовое задание до 26 августа — возможно, именно ты будешь учиться в Сириусе и прокачивать свои скиллы на берегу Чёрного моря!
 
-Кстати, всем, кто пройдёт отбор, обучение, проезд, проживание и питание будут оплачены!''')]);
+Кстати, всем, кто пройдёт отбор, обучение, проезд, проживание и питание будут оплачены!'''),
+      Event(id: '2', image: DeferredImage(() async {
+        var imageBytes = await rootBundle.load('assets/event.jpg');
+        return imageBytes.buffer.asUint8List();
+      }),
+          title: 'Лекция по Flutter',
+          description: ''),
+      Event(id: '3', image: DeferredImage(() async {
+        var imageBytes = await rootBundle.load('assets/event.jpg');
+        return imageBytes.buffer.asUint8List();
+      }),
+          title: 'Хакатон-митап, осень 2024',
+          description: ''),
+      Event(id: '4', image: DeferredImage(() async {
+        var imageBytes = await rootBundle.load('assets/event.jpg');
+        return imageBytes.buffer.asUint8List();
+      }),
+          title: 'Дизайн-митап',
+          description: ''),
+      Event(id: '5', image: DeferredImage(() async {
+        var imageBytes = await rootBundle.load('assets/event.jpg');
+        return imageBytes.buffer.asUint8List();
+      }),
+          title: 'Панельная дискуссия, фронтенд',
+          description: '')
+    ]);
   }
 
   @override

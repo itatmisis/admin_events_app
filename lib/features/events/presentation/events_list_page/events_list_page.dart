@@ -24,8 +24,10 @@ class EventsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
+    return Scaffold(body:
+        BlocBuilder<EventsListBloc, EventsListState>(
+            builder: (context, state) {
+      return CustomScrollView(
         slivers: [
           const SliverAppBar(
             backgroundColor: Colors.transparent,
@@ -35,54 +37,47 @@ class EventsListView extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
           ),
-          BlocBuilder<EventsListBloc, EventsListState>(
-            builder: (context, state) {
-              return SliverList.builder(
-                  itemCount: state.events.length,
-                  itemBuilder: (context, i) => Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 20, left: 20, right: 20),
-                        child: InkWell(
-                          onTap: () => context.router
-                              .push(EventRoute(eventId: state.events[i].id)),
-                          child: Container(
-                            height: 200,
-                            color: const Color(0xFF333333),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(15),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(state.events[i].title),
-                                      ],
-                                    ),
-                                  )
-                                ),
-
-                                AspectRatio(
-                                  aspectRatio: 1,
-                                  child:  FutureBuilder(
-                                      future: state.events[i].image.load(),
-                                      builder: (context, data) {
-                                        if (data.hasData) {
-                                          return Image.memory(data.requireData);
-                                        }
-                                        return const SizedBox.shrink();
-                                      }
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+          SliverList.builder(
+              itemCount: state.events.length,
+              itemBuilder: (context, i) => Padding(
+                    padding:
+                        const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+                    child: InkWell(
+                      onTap: () => context.router
+                          .push(EventRoute(eventId: state.events[i].id)),
+                      child: Container(
+                        height: 120,
+                        color: const Color(0xFF333333),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Padding(
+                              padding: EdgeInsets.all(15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(state.events[i].title),
+                                ],
+                              ),
+                            )),
+                            AspectRatio(
+                              aspectRatio: 1,
+                              child: FutureBuilder(
+                                  future: state.events[i].image.load(),
+                                  builder: (context, data) {
+                                    if (data.hasData) {
+                                      return Image.memory(data.requireData);
+                                    }
+                                    return const SizedBox.shrink();
+                                  }),
+                            )
+                          ],
                         ),
-                      ));
-            },
-          )
+                      ),
+                    ),
+                  ))
         ],
-      ),
-    );
+      );
+    }));
   }
 }
